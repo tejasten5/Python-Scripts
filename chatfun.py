@@ -59,7 +59,7 @@ while(question!="stop"):
 		print("List Present")
 
 	elif(shortcut(question)==True):
-		print("Last If Block")
+		print("Last Block")
 
 	else:
 		print("Not a question")
