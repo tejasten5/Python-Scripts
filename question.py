@@ -1,14 +1,4 @@
-from __future__ import division
-import nltk, re, pprint
-from nltk import word_tokenize
-
-'''
-from textblob import TextBlob
-import grammar_check as g
-tool = g.LanguageTool('en-US')
-'''
 li=[
-
 "are","can","could","what","where",
 "when","which","who","whom","whose",
 "why","would","will","were","whether",
@@ -26,25 +16,19 @@ li=[
 "you'll","they'll","we'll","it'll","i'll","be",
 "i'm",
 ]
-
 question=""
+	
 while(question!='stop'):
-	question=raw_input('enter string')	
-
+	question=raw_input('enter string')
 	wh=question.split(' ')[0]
-	wh=wh.lower()
-	print(wh)
+	wh=wh.lower()	
 	c=wh in li
-
-	if("'" in wh):
-		wo=wh.split("'")
-
 
 	if question.endswith('?') is True:
 		print(" end with ? condition execute")	
 
-	elif(c is True or wo[0] in li):
-		print("List word condition execute")
+	elif(c is True):
+		print("List word condition execute")	
 
 	else:
 		print("Ooops!")
