@@ -1,0 +1,259 @@
+ <!DOCTYPE html>
+<html>
+{% load custom_filters %}
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            overflow: auto;
+        }
+
+        /* width */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: rgb(0, 0, 0);
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(8, 12, 233, 0.747);
+        }
+
+        .collapsible {
+            background-color: rgb(16, 179, 219);
+            color: white;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .active,
+        .collapsible:hover {
+            background-color: #555;
+        }
+
+        .collapsible:after {
+            content: '\002B';
+            color: rgb(158, 73, 73);
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+
+        .active:after {
+            content: "\2212";
+        }
+
+        .content {
+            padding: 0 18px;
+            max-height: 0;
+            overflow: auto;
+            transition: max-height 0.2s ease-out;
+            background-color: #f1f1f1;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <h2>Site Map For User</h2>
+    {% for i in global_list %}
+        <button class="collapsible">Files</button>
+        <div class="content">            
+            {% for j in i.files %}
+                <h3>Name:{{ j.name }}</h3>
+                <h3>Path:<a href="{ url 'j.path' }">{{ j.path }}</a></h3>
+            {% endfor %}
+        </div>
+
+        <button class="collapsible">Folders</button>
+        <div class="content con_1">
+            {% for j in i.folders %} 
+                      
+                {% for k in j %}
+                   
+                    <button class="collapsible">{{k}}</button>
+                    {% with v=j|sitemap %}
+                    {% for key,value in j.items %} 
+
+                        {% if key == v  %}    
+                                    
+                            <div class="content">
+                                <button class="collapsible">Files</button>
+                                    <div class="content">
+                                        {% for i in value|folder1 %}                                        
+                                            {% if value|folder1 %}
+                                                <h3>Name:{{ i.name }}</h3>
+                                                <h3>Path:<a href="{ url 'i.path' }">{{ i.path }}</a></h3>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>   
+
+                                        <button class="collapsible">Folders</button>
+                                    <div class="content">
+                                         {% for k in value|folder2 %}       
+                                            {% if k in value %}   
+                                                                                                                                     
+                                                <button class="collapsible">{{ k }}</button>
+                                                    {% for val in k|folder3:j %}
+                                                    <div class="content">
+                                                    {% for i in val.files%}
+                                                      <h3>Name:{{ i.name }}</h3>
+                                                      <h3>Path:<a href="{ url 'i.path' }">{{ i.path }}</a></h3>
+                                                    {% endfor %}
+                                                     
+                                                   
+                                                
+                                                    </div>  
+                                                    {% endfor %}
+                                            {% endif %}                                  
+                                        {% endfor %}
+                                        
+                                    </div>    
+                                </div>                    
+                        {% endif %}
+                    {% endfor %}
+                    {% endwith %}
+                {% endfor %}
+            {% endfor %}
+    </div>
+    {% endfor %}
+
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+Skip to content
+￼￼
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+￼ 
+ Watch 0
+￼ Unstar 1  Fork 0 tejasten5/Python-Scripts
+ Code  Issues 0  Pull requests 0  Projects 0  Wiki  Security  Insights  Settings
+Python-Scripts
+/
+<!DOCTYPE html> <html> {% load custom_filters %} <head> <meta name="viewport" content="width=device-width, initial-scale=1"> <style> body { overflow: auto; }
+/
+* width *
+/
+::-webkit-scrollbar { width: 5px; }
+/
+* Track *
+/
+::-webkit-scrollbar-track { background: #f1f1f1; }
+/
+* Handle *
+/
+::-webkit-scrollbar-thumb { background: rgb(0, 0, 0); }
+/
+* Handle on hover *
+/
+::-webkit-scrollbar-thumb:hover { background: rgba(8, 12, 233, 0.747); } .collapsible { background-color: rgb(16, 179, 219); color: white; cursor: pointer; padding: 18px; width: 100%; border: none; text-align: left; outline: none; font-size: 15px; } .active, .collapsible:hover { background-color: #555; } .collapsible:after { content: '\002B'; color: rgb(158, 73, 73); font-weight: bold; float: right; margin-left: 5px; } .active:after { content: "\2212"; } .content { padding: 0 18px; max-height: 0; overflow: auto; transition: max-height 0.2s ease-out; background-color: #f1f1f1; } <
+/
+style> <
+/
+head> <body> <h2>Site Map For User<
+/
+h2> {% for i in global_list %} <button class="collapsible">Files<
+/
+button> <div class="content"> {% for j in i.files %} <h3>Name:{{ j.name }}<
+/
+h3> <h3>Path:<a href="{ url 'j.path' }">{{ j.path }}<
+/
+a><
+/
+h3> {% endfor %} <
+/
+div> <button class="collapsible">Folders<
+/
+button> <div class="content con_1"> {% for j in i.folders %} {% for k in j %} <button class="collapsible">{{k}}<
+/
+button> {% with v=j|sitemap %} {% for key,value in j.items %} {% if key == v %} <div class="content"> <button class="collapsible">Files<
+/
+button> <div class="content"> {% for i in value|folder1 %} {% if value|folder1 %} <h3>Name:{{ i.name }}<
+/
+h3> <h3>Path:<a href="{ url 'i.path' }">{{ i.path }}<
+/
+a><
+/
+h3> {% endif %} {% endfor %} <
+/
+div> <button class="collapsible">Folders<
+/
+button> <div class="content"> {% for k in value|folder2 %} {% if k in value %} <button class="collapsible">{{ k }}<
+/
+button> {% for val in k|folder3:j %} <div class="content"> {% for i in val.files%} <h3>Name:{{ i.name }}<
+/
+h3> <h3>Path:<a href="{ url 'i.path' }">{{ i.path }}<
+/
+a><
+/
+h3> {% endfor %} <
+/
+div> {% endfor %} {% endif %} {% endfor %} <
+/
+div> <
+/
+div> {% endif %} {% endfor %} {% endwith %} {% endfor %} {% endfor %} <
+/
+div> {% endfor %} <script> var coll = document.getElementsByClassName("collapsible"); var i; for (i = 0; i < coll.length; i++) { coll[i].addEventListener("click", function () { this.classList.toggle("active"); var content = this.nextElementSibling; if (content.style.maxHeight) { content.style.maxHeight = null; } else { content.style.maxHeight = content.scrollHeight + "px"; } }); } <
+/
+script> <
+/
+body> <
+/
+￼
+Cancel
+￼ Edit new file  ￼ Preview
+￼￼￼
+1
+​
+￼
+Commit new file
+Commit summary￼ Optional extended description
+￼
+￼ Commit directly to the master branch.
+￼ Create a new branch for this commit and start a pull request. Learn more about pull requests.
+￼ Commit new file  Cancel
+© 2019 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        }
+    </script>
+</body>
+</html>
