@@ -1,7 +1,7 @@
 def user_sitemap(request):
     import os    
     list_allfiles=[]
-    dest_path = os.path.join(settings.BASE_DIR, "client")
+    dest_path = os.path.join(settings.BASE_DIR, "client")#Change To Path of Folder
     list_allfiles=os.listdir(dest_path)
     global_list=[]        
     files={}
